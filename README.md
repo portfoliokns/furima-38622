@@ -22,32 +22,28 @@
 | description       | text       | null: false                    |
 | category_id       | string     | null: false                    |
 | status_id         | string     | null: false                    | 
-| payment_method_id | string     | null: false                    |
-| shipping_area_id  | string     | null: false                    |
-| shipping_day_id   | string     | null: false                    |
+| payment_method_id | integer    | null: false                    |
+| shipping_area_id  | integer    | null: false                    |
+| shipping_day_id   | integer    | null: false                    |
 | selling_price     | integer    | null: false                    |
-| user_id           | references | null: false, foreign_key: true |
+| user              | references | null: false, foreign_key: true |
 
-## historyテーブル ： 商品履歴テーブル
+## historiesテーブル ： 商品履歴テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| card_info     | string     | null: false                    |
-| valid_year    | integer    | null: false                    |
-| valid_month   | integer    | null: false                    |
-| secure_code   | integer    | null: false                    |
-| phone_number  | string     | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
-| item_id       | references | null: false, foreign_key: true |
-| delivery_id   | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
 
 
-## deliveryテーブル ： 配送先情報テーブル
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| post_code      | string | null: false |
-| prefecture     | string | null: false |
-| municipality   | string | null: false |
-| house_number   | string |             |
-| building_name  | string | null: false |
+## deliveriesテーブル ： 配送先情報テーブル
+| Column         | Type    | Options     |
+| -------------- | ------- | ----------- |
+| phone_number   | string  | null: false |
+| post_code      | string  | null: false |
+| prefecture     | integer | null: false |
+| municipality   | string  | null: false |
+| house_number   | string  | null: false |
+| building_name  | string  |             |
+| history        | references | null: false, foreign_key: true |
 
