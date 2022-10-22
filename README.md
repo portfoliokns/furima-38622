@@ -32,7 +32,7 @@ has_many :histories
 
 # アソシエーション
 belongs_to :user
-has_many :histories
+has_one :history
 
 ## historiesテーブル ： 商品履歴テーブル
 
