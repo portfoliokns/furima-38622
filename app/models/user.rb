@@ -4,13 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+  VALID_NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々ー]+\z/
+  VALID_KANA_REGEX = /\A[ァ-ヶ]+\z/
+  
   validates :nickname, presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :first_name_kana, presence: true
-  validates :last_name_kana, presence: true
+  validates :password, format: { with: VALID_PASSWORD_REGEX, message: "is invalid. Include both letters and numbers", allow_blank: true}
+  with_options presence: true, format: { with: VALID_NAME_REGEX, message: "is invalid. Input full-width characters", allow_blank: true} do
+    validates :first_name
+    validates :last_name
+  end
+  with_options presence: true, format: { with: VALID_KANA_REGEX, message: "is invalid. Input full-width katakana characters", allow_blank: true} do
+    validates :first_name_kana, presence: true
+    validates :last_name_kana, presence: true
+  end
   validates :birth_date, presence: true
 
 end
