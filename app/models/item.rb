@@ -9,19 +9,18 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_day
 
+  validates :image, presence: true
   validates :name, presence: true
   validates :description, presence: true
 
-  #プルダウンの選択が「---」の時は保存できないように設定してある
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :payment_method_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_day_id, numericality: { other_than: 1 , message: "can't be blank"}
 
-  # with_options presence: true, format: { with: VALID_NAME_REGEX, message: 'is ???',allow_blank: true } do
-  #   validates :selling_price
-  # end
-  validates :selling_price, presence: true
-
+  VALID_NUMERIC_MIN = 300
+  VALID_NUMERIC_MAX = 9_999_999
+  validates :selling_price, presence: true, 
+            numericality: { greater_than_or_equal_to: VALID_NUMERIC_MIN, less_than_or_equal_to: VALID_NUMERIC_MAX, allow_blank: true }
 end
