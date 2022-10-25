@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
 
   validates :name, presence: true
-  validates :discription, presence: true
+  validates :description, presence: true
 
   #プルダウンの選択が「---」の時は保存できないように設定してある
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
@@ -19,8 +19,9 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_day_id, numericality: { other_than: 1 , message: "can't be blank"}
 
-  with_options presence: true, format: { with: VALID_NAME_REGEX, message: 'is ???',allow_blank: true } do
-    validates :seelling_price
-  end
+  # with_options presence: true, format: { with: VALID_NAME_REGEX, message: 'is ???',allow_blank: true } do
+  #   validates :selling_price
+  # end
+  validates :selling_price, presence: true
 
 end
