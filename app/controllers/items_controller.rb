@@ -3,6 +3,13 @@ class ItemsController < ApplicationController
   # before_action :move_to_index, only: [:edit]
 
   def index
+    @items = Item.all.order("created_at DESC")
+    payments = PaymentMethod.all
+
+    @payment_methods = ['']
+    payments.each do |payment|
+      @payment_methods.push(payment.name)
+    end
   end
 
   def new
