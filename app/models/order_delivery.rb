@@ -8,14 +8,13 @@ class OrderDelivery
     validates :item_id
     validates :post_code,
       format: {with: VALID_POSTCODE_FORMAT, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
-      validates :municipality
-      validates :house_number
-      validates :phone_number,
-      numericality: {only_integer: true, message: "is invalid. Input only number"},
-      length: {in: 10..11, message: "Phone number is valid. "}
+    validates :municipality
+    validates :house_number
+    validates :phone_number,
+      numericality: {only_integer: true, message: "is invalid. Input only number" },
+      length: {in: 10..11, message: "is too short"}
     end
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-    # validates :building_name
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
