@@ -49,11 +49,11 @@ class ItemsController < ApplicationController
                                  :shipping_day_id, :selling_price, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    redirect_to root_path unless @item.user_id == current_user.id
-  end
-
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path unless @item.user_id == current_user.id
   end
 end
