@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 2022_10_29_103156) do
     t.string "house_number", null: false
     t.string "building_name"
     t.string "phone_number", null: false
-    t.bigint "history_id", null: false
+    t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["history_id"], name: "index_deliveries_on_history_id"
+    t.index ["order_id"], name: "index_deliveries_on_order_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

@@ -8,19 +8,19 @@ class OrderDelivery
     validates :item_id
     validates :post_code,
       format: {with: VALID_POSTCODE_FORMAT, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
-    validates :prefecture_id,
-      numericality: { other_than: 1, message: "can't be blank" }
-    validates :municipality
-    validates :house_number 
-    validates :phone_number,
-      numericality: {only_integer: true, message: "is invalid. Input only number"}
+      validates :municipality
+      validates :house_number
+      validates :phone_number,
+      numericality: {only_integer: true, message: "is invalid. Input only number"},
       length: {in: 10..11, message: "Phone number is valid. "}
-  end
-  validates :building_name
+    end
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    # validates :building_name
 
   def save
-    order = Donation.create(user_id: user_id, item_id: user_id)
-    Delivery.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order.id)
+    order = Order.create(user_id: user_id, item_id: item_id)
+    Delivery.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality,
+            house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order.id)
   end
-  
+
 end
