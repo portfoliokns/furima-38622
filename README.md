@@ -14,7 +14,7 @@
 
 # アソシエーション
 has_many :items
-has_many :histories
+has_many :orders
 
 ##  itemsテーブル ： 商品出品テーブル
 
@@ -32,9 +32,9 @@ has_many :histories
 
 # アソシエーション
 belongs_to :user
-has_one :history
+has_one :order
 
-## historiesテーブル ： 商品履歴テーブル
+## ordersテーブル ： 商品履歴テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -56,7 +56,7 @@ has_one :delivery
 | house_number   | string  | null: false |
 | building_name  | string  |             |
 | phone_number   | string  | null: false |
-| history        | references | null: false, foreign_key: true |
+| orders        | references | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :history
+belongs_to :order

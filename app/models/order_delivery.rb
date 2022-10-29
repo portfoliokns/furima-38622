@@ -1,4 +1,4 @@
-class HistoryDelivery
+class OrderDelivery
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number
 
@@ -19,8 +19,8 @@ class HistoryDelivery
   validates :building_name
 
   def save
-    history = Donation.create(user_id: user_id, item_id: user_id)
-    Delivery.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, house_number: house_number, building_name: building_name, phone_number: phone_number, history_id: history.id)
+    order = Donation.create(user_id: user_id, item_id: user_id)
+    Delivery.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order.id)
   end
   
 end
