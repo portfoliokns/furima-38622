@@ -6,7 +6,7 @@ RSpec.describe OrderDelivery, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item, user_id: user.id)
       @order_delivery = FactoryBot.build(:order_delivery, user_id: user.id, item_id: item.id)
-      sleep 0.1 # 0.1秒待機
+      sleep 0.1
     end
 
     context '購入情報を正しく入力している場合' do
@@ -61,16 +61,21 @@ RSpec.describe OrderDelivery, type: :model do
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("Phone number can't be blank")
       end
-      # ↑ここエラーパターンが3つあるから制御が必要かも
 
       it 'phone_numberが半角数字意外では登録できない' do
-        @order_delivery.phone_number = '０８０１２３４５６７８'
+        @order_delivery.phone_number = '090-1234-5678'
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
 
-      it 'phone_numberの数字が10桁または11桁でないと登録できない' do
+      it 'phone_numberの数字が9桁以下では登録できない' do
         @order_delivery.phone_number = '080123456'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Phone number is too short")
+      end
+
+      it 'phone_numberの数字が12桁以上では登録できない' do
+        @order_delivery.phone_number = '080123456789'
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("Phone number is too short")
       end
