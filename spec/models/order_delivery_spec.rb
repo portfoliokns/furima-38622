@@ -10,7 +10,7 @@ RSpec.describe OrderDelivery, type: :model do
     end
 
     context '購入情報を正しく入力している場合' do
-      it 'すべての値(post_code prefecture_id municipality house_number building_name phone_number order_id user_id item_id) が正しく入力されていれば登録できる' do
+      it 'すべての値(post_code prefecture_id municipality house_number building_name phone_number order_id user_id item_id token price) が正しく入力されていれば登録できる' do
         expect(@order_delivery).to be_valid
       end
 
@@ -26,6 +26,18 @@ RSpec.describe OrderDelivery, type: :model do
     end
 
     context '購入情報を正しく入力していない場合' do
+      it 'tokenが空では登録できない' do
+        @order_delivery.token = ''
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'priceが空では登録できない' do
+        @order_delivery.price = ''
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Price can't be blank")
+      end
+
       it 'post_codeが空では登録できない' do
         @order_delivery.post_code = ''
         @order_delivery.valid?

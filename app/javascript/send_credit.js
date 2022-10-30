@@ -1,5 +1,5 @@
 function send_credit (){
-  Payjp.setPublicKey("pk_test_cbfe17c56a7aa9716f200004");
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   const submit = document.getElementById('button');
   submit.addEventListener("click",(e) => {
     e.preventDefault();
@@ -12,9 +12,7 @@ function send_credit (){
       exp_month: formData.get("order_delivery[card_exp_month]"),
       exp_year: `20${formData.get("order_delivery[card_exp_year]")}`,
     };
-    // console.log(card)
-    // debugger
-    // console.log('発火')
+
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;

@@ -13,6 +13,8 @@ class OrderDelivery
     validates :phone_number,
       numericality: {only_integer: true, message: "is invalid. Input only number", allow_blank: true },
       length: {in: 10..11, message: "is too short", allow_blank: true}
+    validates :token
+    validates :price
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
 
