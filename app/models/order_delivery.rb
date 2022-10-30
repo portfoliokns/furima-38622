@@ -7,13 +7,12 @@ class OrderDelivery
     validates :user_id
     validates :item_id
     validates :post_code,
-      format: {with: VALID_POSTCODE_FORMAT, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
+      format: {with: VALID_POSTCODE_FORMAT, message: "is invalid. Enter it as follows (e.g. 123-4567)", allow_blank: true }
     validates :municipality
     validates :house_number
     validates :phone_number,
-      numericality: {only_integer: true, message: "is invalid. Input only number" },
-      length: {in: 10..11, message: "is too short"}
-    validates :order_id
+      numericality: {only_integer: true, message: "is invalid. Input only number", allow_blank: true },
+      length: {in: 10..11, message: "is too short", allow_blank: true}
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
 
