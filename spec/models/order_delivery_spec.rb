@@ -43,11 +43,11 @@ RSpec.describe OrderDelivery, type: :model do
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("Post code can't be blank")
       end
-      
+
       it 'post_codeが正しいフォーマット(123-4567)でないと登録できない' do
         @order_delivery.post_code = '1234567'
         @order_delivery.valid?
-        expect(@order_delivery.errors.full_messages).to include("Post code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_delivery.errors.full_messages).to include('Post code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it 'prefecture_idが空(---)では登録できない' do
@@ -67,7 +67,7 @@ RSpec.describe OrderDelivery, type: :model do
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("House number can't be blank")
       end
-      
+
       it 'phone_numberが空では登録できない' do
         @order_delivery.phone_number = ''
         @order_delivery.valid?
@@ -77,19 +77,19 @@ RSpec.describe OrderDelivery, type: :model do
       it 'phone_numberが半角数字意外では登録できない' do
         @order_delivery.phone_number = '090-1234-5678'
         @order_delivery.valid?
-        expect(@order_delivery.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order_delivery.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
 
       it 'phone_numberの数字が9桁以下では登録できない' do
         @order_delivery.phone_number = '080123456'
         @order_delivery.valid?
-        expect(@order_delivery.errors.full_messages).to include("Phone number is too short")
+        expect(@order_delivery.errors.full_messages).to include('Phone number is too short')
       end
 
       it 'phone_numberの数字が12桁以上では登録できない' do
         @order_delivery.phone_number = '080123456789'
         @order_delivery.valid?
-        expect(@order_delivery.errors.full_messages).to include("Phone number is too short")
+        expect(@order_delivery.errors.full_messages).to include('Phone number is too short')
       end
 
       it 'user_idが空では登録できない' do
